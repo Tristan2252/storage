@@ -19,10 +19,10 @@
    register: firewall_status
    with_items:
            - firewall-cmd --zone=trusted --add-service=glusterfs --permanent
-           - firewall-cmd --zone=trusted --add-source=129.138.6.213 --permanent 
-           - firewall-cmd --zone=trusted --add-source=129.138.6.214 --permanent
+           - firewall-cmd --zone=trusted --add-source=############# --permanent 
+           - firewall-cmd --zone=trusted --add-source=############# --permanent
              #TODO: figure out what ports need to be opened for clients vvvvvvv
-             #- firewall-cmd --zone=trusted --add-source=129.138.6.199 --permanent 
+             #- firewall-cmd --zone=trusted --add-source=############# --permanent 
            - firewall-cmd --reload
    changed_when: "'Warning: ALREADY_ENABLED:' not in firewall_status.stderr"
 
@@ -33,8 +33,8 @@
    #           line: "{{ item }}" 
    #           state: present
    #   with_items:
-   #           - '129.138.6.214 atreides atreides.cs.nmt.edu'
-   #           - '129.138.6.213 harkonnen harkonnen.cs.nmt.edu'
+   #           - '############# atreides atreides.cs.nmt.edu'
+   #           - '############# harkonnen harkonnen.cs.nmt.edu'
 
  
  - name: setup brick directory
