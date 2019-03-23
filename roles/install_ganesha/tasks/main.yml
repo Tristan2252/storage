@@ -1,0 +1,45 @@
+--- 
+
+ - name: install ganesha
+   yum:
+           name: '{{ item }}'
+           state: latest
+   with_items:
+           - glusterfs-api
+           - nfs-ganesha-gluster
+
+ - name: Create exports directory
+   file:
+        path: /etc/ganesha/exports
+        state: directory
+   tags: testing
+
+ - name: copy ganesh export config
+   copy:
+        src: ganesha.conf
+        dest: /etc/ganesha/ganesha.conf
+        owner: root
+        group: root
+        force: yes
+   register: config
+   tags: testing
+
+ - name: copy ganesh export config
+   copy:
+        src: export.userhomes.conf
+        dest: /etc/ganesha/exports/export.userhomes.conf
+        owner: root
+        group: root
+        force: yes
+   register: export_config
+   tags: testing
+
+ - name: Restart nfs-ganesha
+   service:
+        name: nfs-ganesha
+        state: restarted
+   when: "config.changed or export_config.changed"
+   tags: testing
+
+
+

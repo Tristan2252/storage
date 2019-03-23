@@ -1,0 +1,8 @@
+---
+ - hosts: storage
+   remote_user: root
+   roles:
+           - update
+           - install_gluster
+           - install_ganesha
+           - install_vim_tmux

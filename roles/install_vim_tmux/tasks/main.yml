@@ -1,0 +1,9 @@
+---
+ - name: install vim and tmux
+   yum:
+           name: '{{ item }}'
+           state: latest
+   with_items:
+           - vim
+           - tmux     
+
